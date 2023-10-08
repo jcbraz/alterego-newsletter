@@ -50,9 +50,18 @@ const { title } = Astro.props;
   </head>
   <body class="bg-colorLightGrey">
     <slot />
-  </body><style>
-    body {
-      font-family: "Space Grotesk Variable", sans-serif;
-    }
-  </style>
+    <style>
+      body {
+        font-family: "Space Grotesk Variable", sans-serif;
+      }
+    </style>
+    <script>
+      window.va =
+        window.va ||
+        function () {
+          (window.vaq = window.vaq || []).push(arguments);
+        };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
 </html>
