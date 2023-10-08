@@ -1,14 +1,14 @@
 ---
 import "@/styles/globals.css";
 import Layout from "../layouts/Layout.astro";
-import SignupBanner from "@/components/page/signup-banner.astro";
-import PostHistory from "@/components/page/post-history.astro";
 import RequirementsAccording from "@/components/ui/requirements-according";
+import SignupBanner from "@/components/signup/signup-banner.astro";
+import PostHistory from "@/components/signup/post-history.astro";
 ---
 
 <Layout title="The Alter Ego">
   <main
-    class="grid grid-rows-2 lg:gap-20 gap-10 w-screen lg:h-screen h-full min-h-screen p-24"
+    class="flex flex-col justify-center lg:space-y-20 space-y-10 w-screen lg:h-screen h-full min-h-screen p-24"
   >
     <div class="grid lg:grid-cols-2 grid-cols-1 lg:gap-80 gap-40">
       <SignupBanner />
@@ -16,5 +16,4 @@ import RequirementsAccording from "@/components/ui/requirements-according";
     </div>
     <RequirementsAccording client:load />
   </main>
-  <RequirementsAccording />
 </Layout>
