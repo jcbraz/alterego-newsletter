@@ -1,0 +1,43 @@
+---
+import PostCard from "../ui/post-card";
+import type { Post, PostResponse } from "../../lib/schemas";
+
+const publication_id = import.meta.env.BEEHIV_PUBLICATION_ID;
+const api_key = import.meta.env.BEEHIV_API_KEY;
+
+const url = `https://api.beehiiv.com/v2/publications/${publication_id}/posts?expand%5B%5D=free_email_content&audience=free&platform=both&status=confirmed&limit=4&order_by=created&direction=desc`;
+const options = {
+  method: "GET",
+  headers: {
+    Accept: "application/json",
+    Authorization: `Bearer ${api_key}`,
+  },
+};
+
+let postsData: Post[] = [];
+
+try {
+  const response = await fetch(url, options);
+  const data: PostResponse = await response.json();
+  postsData = data.data;
+} catch (error) {
+  console.error(error);
+}
+---
+
+<div class="flex flex-col items-center justify-center lg:space-y-10 space-y-5">
+  <h2 class="text-colorBlack lg:text-3xl text-xl font-semibold italic uppercase">
+    RECENT POSTS
+  </h2>
+  {
+    postsData.length === 0 ? (
+      <p class="text-colorBlack text-lg font-normal">No posts yet</p>
+    ) : (
+      <div class="flex flex-col items-center justify-center lg:space-y-6 space-y-3">
+        {postsData.map((post) => (
+          <PostCard client:load title={post.title} href={post.web_url} />
+        ))}
+      </div>
+    )
+  }
+</div>

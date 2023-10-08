@@ -1,29 +1,58 @@
 ---
-import "@fontsource-variable/space-grotesk"
+import "@fontsource-variable/space-grotesk";
+import { SEO } from "astro-seo";
+import logo from "/src/assets/favicon.ico";
 
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
 ---
 
-<!doctype html>
+<!DOCTYPE html>
 <html class="bg-colorLightGrey lg:overflow-hidden overflow-x-hidden" lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body class="bg-colorLightGrey">
-		<slot />
-	</body>
+  <head>
+    <SEO
+      title="The Alter Ego"
+      titleTemplate="%s | Alter Ego"
+      description="The newsletter for the knowledge seeker"
+      canonical="https://thealterego.vercel.app"
+      openGraph={{
+        basic: {
+          url: "https://thealterego.vercel.app",
+          title: "The Alter Ego",
+          type: "website",
+          image: logo,
+        },
+        optional: {
+          siteName: "The Alter Ego",
+          description: "The newsletter for the knowledge seeker",
+          locale: "en",
+        },
+      }}
+      titleDefault="The Alter Ego"
+      ,
+      extend={{
+        link: [{ rel: "icon", href: logo }],
+        meta: [
+          {
+            name: "twitter:image",
+            content: logo,
+          },
+          {
+            name: "twitter:title",
+            content: "The Alter Ego",
+          },
+        ],
+      }}
+    />
+  </head>
+  <body class="bg-colorLightGrey">
+    <slot />
+  </body><style>
+    body {
+      font-family: "Space Grotesk Variable", sans-serif;
+    }
+  </style>
 </html>
-<style>
-	body {
-		font-family: "Space Grotesk Variable", sans-serif;
-	}
-</style>
